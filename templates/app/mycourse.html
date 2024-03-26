@@ -1,0 +1,28 @@
+{% extends "app/basic.html" %}
+
+
+{% block body %}
+<div class="container mt-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sr No.</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Actions</th> <!-- Added a new column for actions -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ course.course_name }}</td>
+          <td>
+            <a href="/update_course/{{course.id}}" class="btn btn-primary">Update</a> <!-- Update button -->
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock body %}
+    

@@ -1,0 +1,17 @@
+<!-- app/templates/user_form.html -->
+{% extends "app/basic.html" %}
+{% block body %}
+
+
+<div class="container">
+    <h2>User Form</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+
+{% endblock body %}

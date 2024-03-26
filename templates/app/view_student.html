@@ -1,0 +1,56 @@
+{% extends "app/basic.html" %}
+{% block body %}
+
+<div class="container mt-3">
+  <form method="post" action="/update" class="d-flex" role="search">
+    {% csrf_token %}
+    <input class="form-control me-2" name="email" type="email" placeholder="Enter Email to search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+</div>
+
+{% for message in messages %}
+  <h5 class="container mt-2" ">{{ message }}</h5>
+{% endfor %}
+  
+<div class="container mt-2">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sr No.</th>
+        <th scope="col">Email</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">Phone no.</th>
+        <th scope="col">DOB</th>
+        <th scope="col">City</th>
+        <th scope="col">Actions</th> <!-- Added a new column for actions -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.phone }}</td>
+        {% if user.dob %}
+        <td>{{ user.dob }}</td>
+        {% else %}
+        <td>No Data</td>
+        {% endif %}
+        {% if user.city %}
+        <td>{{ user.city }}</td>
+        {% else %}
+        <td>No Data</td>
+        {% endif %}
+        <td>
+          <a href="/update_user/{{ user.id }}" class="btn btn-primary">Update</a>
+          <a href="/delete-user/{{ user.id }}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock body %}
